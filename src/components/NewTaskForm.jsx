@@ -1,72 +1,34 @@
 import React, { useState } from "react";
 
 const NewTaskForm = () => {
-  const [formData, setFormData] = useState({
+  const DEFAULT_DATA = {
     title: "",
     description: "",
     dueDate: "",
-    priority: "",
+    priority: "Low",
+    timeToFinish: "00:00",
     status: "",
     active: false,
     link: "",
-  });
+  };
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [priority, setPriority] = useState("Low");
-  const [timeToFinish, setTimeToFinish] = useState("00:00");
-  const [link, setLink] = useState("");
+  const [formData, setFormData] = useState(DEFAULT_DATA);
 
-  const handleChange = (event) => {
-    const inputToChange = event.target.id;
-    const value = event.target.value;
+  const handleChange = (e) => {
+    const inputName = e.target.name;
+    const inputValue = e.target.value;
 
-    switch (inputToChange) {
-      case "title":
-        setTitle(value);
-        break;
-      case "description":
-        setDescription(value);
-        break;
-      case "dueDate":
-        setDueDate(value);
-        break;
-      case "priority":
-        setPriority(value);
-        break;
-      case "timeToFinish":
-        setTimeToFinish(value);
-        break;
-      case "link":
-        setLink(value);
-        break;
-      default:
-        console.warn(`Unhandled input: ${inputToChange}`);
-    }
+    setFormData({ ...formData, [inputName]: inputValue });
+
+    console.log(formData);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newTask = {
-      title: title,
-      description: description,
-      dueDate: dueDate,
-      priority: priority,
-      status: "standby",
-      active: false,
-      link: link,
-    };
+    console.log(formData);
 
-    setFormData(newTask);
-
-    setTitle("");
-    setDescription("");
-    setDueDate("");
-    setPriority("");
-    setTimeToFinish("");
-    setLink("");
+    setFormData(DEFAULT_DATA);
   };
 
   return (
@@ -80,9 +42,8 @@ const NewTaskForm = () => {
         </label>
         <input
           type="text"
-          id="title"
           name="title"
-          value={title}
+          value={formData.title}
           onChange={handleChange}
           className="text-black mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           required
@@ -93,9 +54,8 @@ const NewTaskForm = () => {
           Description
         </label>
         <textarea
-          id="description"
           name="description"
-          value={description}
+          value={formData.description}
           onChange={handleChange}
           className="text-black mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           required
@@ -107,9 +67,8 @@ const NewTaskForm = () => {
         </label>
         <input
           type="date"
-          id="dueDate"
           name="dueDate"
-          value={dueDate}
+          value={formData.dueDate}
           onChange={handleChange}
           className="text-black mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           required
@@ -120,9 +79,8 @@ const NewTaskForm = () => {
           Priority
         </label>
         <select
-          id="priority"
           name="priority"
-          value={priority}
+          value={formData.priority}
           onChange={handleChange}
           className="text-black mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         >
@@ -148,18 +106,18 @@ const NewTaskForm = () => {
               viewBox="0 0 24 24"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               />
             </svg>
           </div>
           <input
             type="time"
-            id="timeToFinish"
+            name="timeToFinish"
             className="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             min="00:00"
-            value={timeToFinish}
+            value={formData.timeToFinish}
             onChange={handleChange}
             required
           />
@@ -171,9 +129,8 @@ const NewTaskForm = () => {
         </label>
         <input
           type="text"
-          id="link"
           name="link"
-          value={link}
+          value={formData.link}
           onChange={handleChange}
           className="text-black mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           required
