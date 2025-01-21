@@ -1,5 +1,6 @@
 const React = require("react");
 import { motion } from "motion/react";
+import CardFooter from "./Card/CardFooter";
 
 export const Card = ({
   title,
@@ -13,9 +14,9 @@ export const Card = ({
     <motion.div
       initial={{ opacity: 0, scale: 0.2 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="w-[270px] h-[220px] flex flex-col bg-[#363636] border-t-4 border-t-blue-600 shadow-sm rounded-xl"
+      className="w-[260px] h-[270px] flex flex-col justify-between bg-[#363636] border-t-4 border-t-blue-600 shadow-sm rounded-xl"
     >
-      <div className="p-4 md:p-5">
+      <div className="h-[77%] w-full p-4">
         <h3 className="text-lg font-bold text-white">{title}</h3>
         <p className="text-xs mt-2 text-white">{description}</p>
         <p className="text-xs mt-2 text-white">Due date: {dueDate}</p>
@@ -35,14 +36,12 @@ export const Card = ({
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
           >
             <path d="m9 18 6-6-6-6"></path>
           </svg>
         </a>
       </div>
+      <CardFooter creationDay={14} creationMonth={1} />
     </motion.div>
   );
 };
