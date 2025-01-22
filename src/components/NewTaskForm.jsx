@@ -1,13 +1,14 @@
+import axios from "axios";
 import React, { useState } from "react";
 
-const NewTaskForm = () => {
+const NewTaskForm = ({ onTaskCreated }) => {
   const DEFAULT_DATA = {
     title: "",
     description: "",
     dueDate: "",
     priority: "Low",
     timeToFinish: "00:00",
-    status: "",
+    status: "standby",
     active: false,
     link: "",
   };
@@ -19,14 +20,19 @@ const NewTaskForm = () => {
     const inputValue = e.target.value;
 
     setFormData({ ...formData, [inputName]: inputValue });
-
-    console.log(formData);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     console.log(formData);
+
+    // axios
+    //   .post("/api/tasks", formData)
+    //   .then(() => {})
+    //   .catch((err) => alert(err?.response?.data));
+
+    onTaskCreated(formData);
 
     setFormData(DEFAULT_DATA);
   };
@@ -41,6 +47,7 @@ const NewTaskForm = () => {
           Title
         </label>
         <input
+          id="title"
           type="text"
           name="title"
           value={formData.title}
@@ -54,6 +61,7 @@ const NewTaskForm = () => {
           Description
         </label>
         <textarea
+          id="description"
           name="description"
           value={formData.description}
           onChange={handleChange}
@@ -66,6 +74,7 @@ const NewTaskForm = () => {
           Due Date
         </label>
         <input
+          id="dueDate"
           type="date"
           name="dueDate"
           value={formData.dueDate}
@@ -79,6 +88,7 @@ const NewTaskForm = () => {
           Priority
         </label>
         <select
+          id="priority"
           name="priority"
           value={formData.priority}
           onChange={handleChange}
@@ -113,6 +123,7 @@ const NewTaskForm = () => {
             </svg>
           </div>
           <input
+            id="time"
             type="time"
             name="timeToFinish"
             className="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -124,10 +135,11 @@ const NewTaskForm = () => {
         </div>
       </div>
       <div>
-        <label htmlFor="description" className="block text-sm font-medium">
+        <label htmlFor="link" className="block text-sm font-medium">
           link
         </label>
         <input
+          id="link"
           type="text"
           name="link"
           value={formData.link}

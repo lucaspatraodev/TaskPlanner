@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "./Card";
 
 const TaskList = ({ tasks }) => {
   const [actualBoardStatus, setActualBoardStatus] = useState("standby");
+
+  useEffect(() => {}, [tasks]);
 
   return (
     <section className="flex flex-col h-full  w-4/6 bg-[#454545] rounded-md p-4">
