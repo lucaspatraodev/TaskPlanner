@@ -1,13 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "@/components/Layout";
 import TaskHighlight from "@/components/TaskHighlight";
 import TaskList from "@/components/TaskList";
+import axios from "axios";
 
 export default function Home({ tasks }) {
+  const [taskList, SetTaskList] = useState(tasks);
+
+  const createTask = async (newTask) => {
+    console.log("newtask:", newTask);
+
+    await axios
+      .post("/api/tasks", newTask)
+      .then(() => {})
+      .catch((err) => alert(err?.response?.data));
+
+    handleReload();
+  };
+
+  const handleReload = async () => {
+    try {
+      axios
+        .get("http://localhost:3001/api/tasks")
+        .then((res) => {
+          SetTaskList(res.data);
+        })
+        .catch((err) => {
+          alert(err?.response?.data || "Error trying GET to /api/tasks");
+        });
+    } catch (error) {
+      console.error("Error trying to GET tasks: ", error);
+    }
+  };
+
   return (
     <Layout>
-      <TaskHighlight />
-      <TaskList tasks={tasks} />
+      <TaskHighlight onTaskCreated={createTask} />
+      <TaskList tasks={taskList} />
     </Layout>
   );
 }
