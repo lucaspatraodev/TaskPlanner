@@ -25,15 +25,7 @@ const NewTaskForm = ({ onTaskCreated }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(formData);
-
-    // axios
-    //   .post("/api/tasks", formData)
-    //   .then(() => {})
-    //   .catch((err) => alert(err?.response?.data));
-
     onTaskCreated(formData);
-
     setFormData(DEFAULT_DATA);
   };
 

@@ -8,8 +8,6 @@ export default function Home({ tasks }) {
   const [taskList, SetTaskList] = useState(tasks);
 
   const createTask = async (newTask) => {
-    console.log("newtask:", newTask);
-
     await axios
       .post("/api/tasks", newTask)
       .then(() => {})
@@ -20,14 +18,9 @@ export default function Home({ tasks }) {
 
   const handleReload = async () => {
     try {
-      axios
-        .get("http://localhost:3001/api/tasks")
-        .then((res) => {
-          SetTaskList(res.data);
-        })
-        .catch((err) => {
-          alert(err?.response?.data || "Error trying GET to /api/tasks");
-        });
+      axios.get("http://localhost:3001/api/tasks").then((res) => {
+        SetTaskList(res.data);
+      });
     } catch (error) {
       console.error("Error trying to GET tasks: ", error);
     }
