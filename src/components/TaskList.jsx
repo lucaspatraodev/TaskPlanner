@@ -15,6 +15,7 @@ const TaskList = ({ tasks }) => {
             return (
               <Card
                 key={task.id}
+                id={task.id}
                 title={task.title}
                 description={task.description}
                 dueDate={task.dueDate}
