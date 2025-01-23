@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Layout from "@/components/Layout";
-import TaskHighlight from "@/components/TaskHighlight";
 import TaskList from "@/components/TaskList";
 import axios from "axios";
 
@@ -27,8 +26,7 @@ export default function Home({ tasks }) {
   };
 
   return (
-    <Layout>
-      <TaskHighlight onTaskCreated={createTask} />
+    <Layout onTaskCreated={createTask}>
       <TaskList tasks={taskList} />
     </Layout>
   );

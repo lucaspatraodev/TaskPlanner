@@ -1,15 +1,9 @@
 const React = require("react");
 import { motion } from "motion/react";
+import Link from "next/link";
 import CardFooter from "./Card/CardFooter";
 
-export const Card = ({
-  title,
-  description,
-  dueDate,
-  priority,
-  status,
-  active,
-}) => {
+export const Card = ({ title, description, dueDate, priority, status, id }) => {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.2 }}
@@ -23,9 +17,9 @@ export const Card = ({
         <p className="text-xs mt-2 text-white">priority: {priority}</p>
         <p className="text-xs mt-2 text-white">status: {status}</p>
 
-        <a
+        <Link
           className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-blue-600 decoration-2 hover:text-blue-700 hover:underline focus:underline focus:outline-none focus:text-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-          href="#"
+          href={`http://localhost:3000/tasks/${id}`}
         >
           Card link
           <svg
@@ -39,7 +33,7 @@ export const Card = ({
           >
             <path d="m9 18 6-6-6-6"></path>
           </svg>
-        </a>
+        </Link>
       </div>
       <CardFooter creationDay={14} creationMonth={1} />
     </motion.div>
