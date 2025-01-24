@@ -7,8 +7,8 @@ const TaskList = ({ tasks }) => {
   useEffect(() => {}, [tasks]);
 
   return (
-    <section className="flex flex-col h-full  w-4/6 bg-[#454545] rounded-md p-4">
-      <div className="grid grid-cols-3 gap-4 max-h-screen overflow-y-auto no-scrollbar h-[90%] p-4">
+    <>
+      <div className="grid grid-cols-4 gap-2 w-fullmax-h-screen overflow-y-auto no-scrollbar h-[90%] p-4">
         {tasks
           .filter((task) => task.status === actualBoardStatus)
           .map((task) => {
@@ -51,7 +51,7 @@ const TaskList = ({ tasks }) => {
           </button>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 

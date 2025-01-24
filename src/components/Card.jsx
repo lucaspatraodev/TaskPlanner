@@ -8,7 +8,7 @@ export const Card = ({ title, description, dueDate, priority, status, id }) => {
     <motion.div
       initial={{ opacity: 0, scale: 0.2 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="w-[260px] h-[270px] flex flex-col justify-between bg-[#363636] border-t-4 border-t-blue-600 shadow-sm rounded-xl"
+      className="w-[230px] h-[270px] flex flex-col justify-between bg-[#363636] border-t-4 border-t-blue-600 shadow-sm rounded-xl"
     >
       <div className="h-[77%] w-full p-4">
         <h3 className="text-lg font-bold text-white">{title}</h3>
@@ -22,6 +22,24 @@ export const Card = ({ title, description, dueDate, priority, status, id }) => {
           href={`http://localhost:3000/tasks/${id}`}
         >
           Card link
+          <svg
+            className="shrink-0 size-4"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+          >
+            <path d="m9 18 6-6-6-6"></path>
+          </svg>
+        </Link>
+
+        <Link
+          className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-blue-600 decoration-2 hover:text-blue-700 hover:underline focus:underline focus:outline-none focus:text-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+          href={`http://localhost:3000/edit/${id}`}
+        >
+          Edit task
           <svg
             className="shrink-0 size-4"
             xmlns="http://www.w3.org/2000/svg"
