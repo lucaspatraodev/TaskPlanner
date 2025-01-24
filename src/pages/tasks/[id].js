@@ -6,29 +6,27 @@ import Link from "next/link";
 const taskDetail = ({ task }) => {
   return (
     <Layout>
-      <section className="h-full w-4/6 bg-[#454545] rounded-md">
-        <motion.div
-          className="flex flex-col w-full h-full p-2"
-          initial={{ scale: 0 }}
-          animate={{ scale: 0.9 }}
-          transition={{
-            duration: 0.2,
-            scale: { type: "spring", visualDuration: 0.22, bounce: 0.2 },
-          }}
-        >
-          <Link href="/" className="text-white bg-yellow-800 p-2 w-20">
-            Go back
-          </Link>
-          <h1>{task.title}</h1>
-          <p>{task.description}</p>
-          <p>{task.dueDate}</p>
-          <p>{task.priority}</p>
-          <p>{task.timeToFinish}</p>
-          <p>{task.status}</p>
-          <p>{task.link}</p>
-          <p>{task.createdAt}</p>
-        </motion.div>
-      </section>
+      <motion.div
+        className="flex flex-col w-full h-full p-2"
+        initial={{ scale: 0 }}
+        animate={{ scale: 0.9 }}
+        transition={{
+          duration: 0.2,
+          scale: { type: "spring", visualDuration: 0.22, bounce: 0.2 },
+        }}
+      >
+        <Link href="/" className="text-white bg-yellow-800 p-2 w-20">
+          Go back
+        </Link>
+        <h1>{task.title}</h1>
+        <p>{task.description}</p>
+        <p>{task.dueDate}</p>
+        <p>{task.priority}</p>
+        <p>{task.timeToFinish}</p>
+        <p>{task.status}</p>
+        <p>{task.link}</p>
+        <p>{task.createdAt}</p>
+      </motion.div>
     </Layout>
   );
 };
