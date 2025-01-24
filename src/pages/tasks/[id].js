@@ -3,7 +3,7 @@ import React from "react";
 import * as motion from "motion/react-client";
 import Link from "next/link";
 
-const taskDetail = ({ taskData }) => {
+const taskDetail = ({ task }) => {
   return (
     <Layout>
       <section className="h-full w-4/6 bg-[#454545] rounded-md">
@@ -19,14 +19,14 @@ const taskDetail = ({ taskData }) => {
           <Link href="/" className="text-white bg-yellow-800 p-2 w-20">
             Go back
           </Link>
-          <h1>{taskData.title}</h1>
-          <p>{taskData.description}</p>
-          <p>{taskData.dueDate}</p>
-          <p>{taskData.priority}</p>
-          <p>{taskData.timeToFinish}</p>
-          <p>{taskData.status}</p>
-          <p>{taskData.link}</p>
-          <p>{taskData.createdAt}</p>
+          <h1>{task.title}</h1>
+          <p>{task.description}</p>
+          <p>{task.dueDate}</p>
+          <p>{task.priority}</p>
+          <p>{task.timeToFinish}</p>
+          <p>{task.status}</p>
+          <p>{task.link}</p>
+          <p>{task.createdAt}</p>
         </motion.div>
       </section>
     </Layout>
@@ -37,10 +37,10 @@ export async function getServerSideProps({ params }) {
   const { id } = params;
 
   const resData = await fetch(`http://localhost:3001/api/tasks/${id}`);
-  const taskData = await resData.json();
+  const task = await resData.json();
 
   return {
-    props: { taskData: taskData },
+    props: { task: task },
   };
 }
 
