@@ -69,7 +69,7 @@ const EditTaskForm = ({ task }) => {
           <input
             id="timeToFinish"
             name="timeToFinish"
-            type="number"
+            type="time"
             value={taskData.timeToFinish}
             onChange={handleChange}
           />
