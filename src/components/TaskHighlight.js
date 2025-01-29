@@ -1,14 +1,12 @@
 import React from "react";
 import NewTaskForm from "./NewTaskForm";
+import TaskCountdown from "./TaskCountdown";
 
-const TaskHighlight = ({ onTaskCreated }) => {
-  const handleTaskCreation = (newTask) => {
-    onTaskCreated(newTask);
-  };
-
+const TaskHighlight = () => {
   return (
-    <div className="h-full w-2/6 bg-[#454545] rounded-md p-4">
-      <NewTaskForm onTaskCreated={handleTaskCreation} />
+    <div className="h-full w-full bg-[#454545] rounded-md p-4">
+      {/* <TaskCountdown task={highlightedTask} /> */}
+      <NewTaskForm />
     </div>
   );
 };

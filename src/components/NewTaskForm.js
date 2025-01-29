@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useTaskContext } from "@/context/TaskContext";
 
-const NewTaskForm = ({ onTaskCreated }) => {
+const NewTaskForm = () => {
+  const { createTask, reloadTasks } = useTaskContext();
+
   const DEFAULT_DATA = {
     title: "",
     description: "",
@@ -21,11 +24,12 @@ const NewTaskForm = ({ onTaskCreated }) => {
     setFormData({ ...formData, [inputName]: inputValue });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    onTaskCreated(formData);
+    await createTask(formData);
     setFormData(DEFAULT_DATA);
+    await reloadTasks();
   };
 
   return (
