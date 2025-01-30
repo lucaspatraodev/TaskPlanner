@@ -23,17 +23,6 @@ export const TaskContextProvider = ({ children, initalTasks }) => {
   const [hasHighlightedTask, setHasHighlightedTask] = useState(false);
   const [highlightedTask, setHighlightedTask] = useState("");
 
-  const highlightTask = (task) => {
-    setHasHighlightedTask(true);
-    setHighlightedTask(task);
-    console.log(task);
-  };
-
-  const clearHighlight = () => {
-    setHasHighlightedTask(false);
-    setHighlightedTask("");
-  };
-
   // TASK CREATION
 
   const createTask = async (newTask) => {
@@ -47,9 +36,9 @@ export const TaskContextProvider = ({ children, initalTasks }) => {
     <TaskContext.Provider
       value={{
         hasHighlightedTask,
+        setHasHighlightedTask,
         highlightedTask,
-        highlightTask,
-        clearHighlight,
+        setHighlightedTask,
         createTask,
         reloadTasks,
         taskList,

@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import TaskHighlight from "@/components/TaskHighlight";
+import TaskHighlight from "@/components/Panel";
 import { TaskContextProvider } from "@/context/TaskContext";
 import * as motion from "motion/react-client";
 import Link from "next/link";

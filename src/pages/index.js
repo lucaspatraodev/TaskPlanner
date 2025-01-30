@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Layout from "@/components/Layout";
 import TaskList from "@/components/TaskList";
 import { TaskContextProvider } from "@/context/TaskContext";
-import TaskHighlight from "@/components/TaskHighlight";
+import { PanelProvider } from "@/context/PanelContext";
 
 export default function Home({ tasks }) {
   return (

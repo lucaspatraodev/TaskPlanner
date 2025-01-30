@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import React from "react";
 import * as motion from "motion/react-client";
 import Link from "next/link";
-import TaskHighlight from "@/components/TaskHighlight";
+import TaskHighlight from "@/components/Panel";
 import { TaskContextProvider } from "@/context/TaskContext";
 
 const taskDetail = ({ task }) => {
