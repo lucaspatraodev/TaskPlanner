@@ -33,8 +33,6 @@ const PanelContent = () => {
         return <NewTagForm />;
       case "NewTaskForm":
         return <NewTaskForm />;
-      case "TaskCountdown":
-        return <TaskCountdown />;
       default:
         return (
           <div className="flex flex-col items-center justify-center h-full space-y-4">
@@ -55,12 +53,6 @@ const PanelContent = () => {
               onClick={() => setActiveComponent("NewTaskForm")}
             >
               Go to New Task Form
-            </button>
-            <button
-              className="p-2 bg-yellow-500 rounded"
-              onClick={() => setActiveComponent("TaskCountdown")}
-            >
-              Go to Task Countdown
             </button>
           </div>
         );
