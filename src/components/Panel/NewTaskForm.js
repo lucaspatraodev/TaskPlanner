@@ -11,7 +11,7 @@ const NewTaskForm = () => {
     description: "",
     dueDate: "",
     priority: "Low",
-    timeToFinish: "00:00",
+    timeToFinish: "0",
     status: "standby",
     active: false,
     link: "",
@@ -107,7 +107,7 @@ const NewTaskForm = () => {
           htmlFor="time"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
-          How many hours to finish?
+          How many time to finish? (In minutes)
         </label>
         <div className="relative">
           <div className="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
@@ -127,10 +127,10 @@ const NewTaskForm = () => {
           </div>
           <input
             id="time"
-            type="time"
+            type="number"
             name="timeToFinish"
             className="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            min="00:00"
+            min="0"
             value={formData.timeToFinish}
             onChange={handleChange}
             required
