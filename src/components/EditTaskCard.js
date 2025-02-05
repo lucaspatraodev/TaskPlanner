@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import axios from "axios";
 
 const EditTaskCard = ({ task, handleGoingBack }) => {
   const [taskData, setTaskData] = useState(task);
@@ -7,6 +8,18 @@ const EditTaskCard = ({ task, handleGoingBack }) => {
   useEffect(() => {
     console.log(taskData);
   }, [taskData]);
+
+  const updateTask = async (e) => {
+    console.log(taskData);
+    e.preventDefault();
+
+    await axios
+      .patch(`/api/tasks`, taskData)
+      .then(() => {
+        alert("Task updated!");
+      })
+      .catch((err) => alert(err?.response?.data));
+  };
 
   const handleChange = (e) => {
     const inputName = e.target.name;
@@ -83,7 +96,7 @@ const EditTaskCard = ({ task, handleGoingBack }) => {
           <input
             id="timeToFinish"
             name="timeToFinish"
-            type="time"
+            type="number"
             value={taskData.timeToFinish}
             onChange={handleChange}
           />
@@ -111,6 +124,14 @@ const EditTaskCard = ({ task, handleGoingBack }) => {
             onChange={handleChange}
           />
         </div>
+        <button
+          className="text-white bg-yellow-800 p-2 w-32"
+          onClick={async (e) => {
+            await updateTask(e);
+          }}
+        >
+          Update task
+        </button>
       </form>
     </motion.div>
   );

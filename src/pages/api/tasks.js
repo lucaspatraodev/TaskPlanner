@@ -6,7 +6,7 @@ export default async function (req, res) {
     const data = await dataRes.json();
 
     return res.send(data);
-  } else if (req.method === "POST") {
+  } else if (req.method === "POST" || req.method === "PATCH") {
     const {
       title,
       description,
@@ -16,7 +16,14 @@ export default async function (req, res) {
       status,
       active,
       link,
+      id,
+      createdAt,
     } = req.body;
+
+    const url =
+      req.method === "POST"
+        ? "http://localhost:3001/api/tasks"
+        : `http://localhost:3001/api/tasks/${id}`;
 
     if (
       !title ||
@@ -26,19 +33,25 @@ export default async function (req, res) {
       !timeToFinish ||
       !status ||
       active === undefined ||
-      !link
+      !link ||
+      !createdAt
     ) {
-      return res.status(402).send("There are missing data!");
+      console.log("Missing data");
+      return res.status(400).send("There are missing data");
     }
 
+    console.log(`request method is ${req.method.toLowerCase()}`);
+    console.log(`url is ${url}`);
+
     try {
-      const axiosResponse = await axios.post(
-        "http://localhost:3001/api/tasks",
+      const axiosResponse = await axios[req.method.toLowerCase()](
+        url,
         req.body
       );
       return res.send(axiosResponse.data);
-    } catch {
-      return status(422).send("Data cannot be stored!");
+    } catch (error) {
+      console.error(error);
+      return res.status(422).send("Data cannot be stored!");
     }
   }
 }
