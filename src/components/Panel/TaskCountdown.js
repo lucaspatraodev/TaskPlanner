@@ -1,6 +1,8 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 
 const TaskCountdown = ({ task }) => {
+  const [isTaskFinished, setIsTaskFinished] = useState(false);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [timeLeft, setTimeLeft] = useState(task.timeToFinish * 60);
 
@@ -16,15 +18,18 @@ const TaskCountdown = ({ task }) => {
     };
   };
 
-  const startTimer = () => {
-    setIsTimerRunning(true);
+  const handleTimerChange = () => {
+    setIsTimerRunning(!isTimerRunning);
   };
 
   useEffect(() => {
     if (!isTimerRunning || timeLeft <= 0) return;
 
     const interval = setInterval(() => {
-      // 61 * 60 = 3660
+      if (timeLeft === 0) {
+        setIsTaskFinished(true);
+      }
+
       setTimeLeft((prevTime) => {
         const newTime = prevTime - 1;
         const { minutes, seconds } = formatTime(newTime);
@@ -43,6 +48,23 @@ const TaskCountdown = ({ task }) => {
       Math.floor(timeLeft / 60) + "minutes and " + (timeLeft % 60) + " seconds"
     );
     setTimeLeft(task.timeToFinish * 60);
+
+    const updateTimeToFinish = async () => {
+      const newTimeToFinish = Math.floor(timeLeft / 60);
+
+      await axios
+        .patch(`/api/tasks/`, {
+          timeToFinish: newTimeToFinish,
+          id: task.id,
+        })
+        .then(() => {
+          alert("Task updated!");
+        })
+        .catch((err) => console.log(err?.response));
+    };
+
+    updateTimeToFinish();
+
     setIsTimerRunning(false);
     const { minutes, seconds } = formatTime(task.timeToFinish * 60);
     setMinutes(minutes);
@@ -87,9 +109,9 @@ const TaskCountdown = ({ task }) => {
       </div>
       <button
         className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg"
-        onClick={startTimer}
+        onClick={handleTimerChange}
       >
-        Start Timer
+        {isTimerRunning ? "Pause Timer" : "Start Timer"}
       </button>
     </div>
   );
