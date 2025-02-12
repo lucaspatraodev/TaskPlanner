@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card } from "./Card";
+import { Card } from "./Card/Card";
 import { useTaskContext } from "@/context/TaskContext";
 
 const TaskList = () => {
@@ -10,7 +10,7 @@ const TaskList = () => {
 
   return (
     <section className="h-full w-full bg-[#454545] rounded-md">
-      <div className="grid grid-cols-5 gap-8 w-full h-[94%] overflow-y-auto no-scrollbar  p-4">
+      <div className="grid grid-cols-3 gap-8 w-full h-[94%] overflow-y-auto no-scrollbar p-4">
         {taskList
           .filter((task) => task.status === actualBoardStatus)
           .map((task) => {
