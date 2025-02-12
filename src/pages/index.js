@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import Layout from "@/components/Layout";
 import TaskList from "@/components/TaskList";
 import { TaskContextProvider } from "@/context/TaskContext";
-import { PanelProvider } from "@/context/PanelContext";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function Home({ tasks }) {
   return (
-    <TaskContextProvider initalTasks={tasks}>
+    <TaskContextProvider initialTasks={tasks} className={poppins}>
       <Layout>
         <TaskList />
       </Layout>
@@ -15,7 +21,7 @@ export default function Home({ tasks }) {
 }
 
 export async function getServerSideProps() {
-  const resData = await fetch("http://localhost:3001/api/tasks");
+  const resData = await fetch("http://localhost:3000/api/tasks");
   const data = await resData.json();
 
   return {

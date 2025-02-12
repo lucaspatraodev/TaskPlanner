@@ -5,8 +5,8 @@ import React, { createContext, useContext, useState } from "react";
 
 const TaskContext = createContext();
 
-export const TaskContextProvider = ({ children, initalTasks }) => {
-  const [taskList, SetTaskList] = useState(initalTasks || []);
+export const TaskContextProvider = ({ children, initialTasks }) => {
+  const [taskList, SetTaskList] = useState(initialTasks || []);
 
   const reloadTasks = async () => {
     try {
