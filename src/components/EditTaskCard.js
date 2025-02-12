@@ -14,11 +14,11 @@ const EditTaskCard = ({ task, handleGoingBack }) => {
     e.preventDefault();
 
     await axios
-      .patch(`/api/tasks`, taskData)
+      .put(`/api/tasks`, taskData)
       .then(() => {
         alert("Task updated!");
       })
-      .catch((err) => alert(err?.response?.data));
+      .catch((err) => console.log(err?.response));
   };
 
   const handleChange = (e) => {
