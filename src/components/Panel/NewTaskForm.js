@@ -2,6 +2,46 @@ import React, { useState } from "react";
 import { useTaskContext } from "@/context/TaskContext";
 import { usePanel } from "@/context/PanelContext";
 
+const SubTaskInput = ({ subTasks, setSubTasks }) => {
+  const [subTask, setSubTask] = useState("");
+
+  const handleAddSubTask = () => {
+    if (subTask.trim() !== "") {
+      setSubTasks([...subTasks, subTask]);
+      setSubTask("");
+    }
+  };
+
+  return (
+    <div>
+      <label htmlFor="subTask" className="block text-sm font-medium">
+        Sub Task
+      </label>
+      <input
+        id="subTask"
+        type="text"
+        value={subTask}
+        onChange={(e) => setSubTask(e.target.value)}
+        className="text-black mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      />
+      <button
+        type="button"
+        onClick={handleAddSubTask}
+        className="mt-2 p-2 bg-green-500 rounded"
+      >
+        Add Sub Task
+      </button>
+      <ul className="mt-2">
+        {subTasks.map((subtask, index) => (
+          <li key={index} className="text-sm">
+            {subtask}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
 const NewTaskForm = () => {
   const { createTask, reloadTasks } = useTaskContext();
   const { setActiveComponent } = usePanel();
@@ -18,6 +58,7 @@ const NewTaskForm = () => {
   };
 
   const [formData, setFormData] = useState(DEFAULT_DATA);
+  const [subTasks, setSubTasks] = useState([]);
 
   const handleChange = (e) => {
     const inputName = e.target.name;
@@ -28,9 +69,12 @@ const NewTaskForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(subTasks);
+    const taskData = { ...formData, subTasks };
 
-    await createTask(formData);
+    await createTask(taskData);
     setFormData(DEFAULT_DATA);
+    setSubTasks([]);
     await reloadTasks();
   };
 
@@ -72,6 +116,7 @@ const NewTaskForm = () => {
           required
         />
       </div>
+      <SubTaskInput subTasks={subTasks} setSubTasks={setSubTasks} />
       <div>
         <label htmlFor="dueDate" className="block text-sm font-medium">
           Due Date
