@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,13 +18,24 @@ const SignIn = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axios.post("http://localhost:3001/signin", {
-      email: formData.email,
-      password: formData.password,
-    });
+    try {
+      const res = await axios.post("http://localhost:3001/signin", {
+        email: formData.email,
+        password: formData.password,
+      });
+
+      const token = res.data;
+
+      if (token) {
+        Cookies.set("token", token, { expires: 1 });
+        router.push("/");
+      }
+    } catch (error) {
+      console.error("Error signing in:", error);
+    }
   };
 
   return (
