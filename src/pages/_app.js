@@ -1,5 +1,13 @@
 import "@/styles/globals.css";
+import { NavigationProvider } from "@/context/NavigationContext";
+import React from "react";
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+function MyApp({ Component, pageProps }) {
+  return (
+    <NavigationProvider>
+      <Component {...pageProps} />
+    </NavigationProvider>
+  );
 }
+
+export default MyApp;
