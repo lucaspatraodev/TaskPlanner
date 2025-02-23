@@ -6,6 +6,8 @@ import React, { createContext, useContext, useState } from "react";
 const TaskContext = createContext();
 
 export const TaskContextProvider = ({ children, initialTasks }) => {
+  const [pomoTasks, setPomoTasks] = useState();
+
   const [taskList, SetTaskList] = useState(initialTasks || []);
 
   const reloadTasks = async () => {
@@ -20,8 +22,8 @@ export const TaskContextProvider = ({ children, initialTasks }) => {
 
   // TASK HIGHLIGHT
 
-  const [hasHighlightedTask, setHasHighlightedTask] = useState(false);
-  const [highlightedTask, setHighlightedTask] = useState("");
+  const [pomoHasHighlightedTask, setPomoHasHighlightedTask] = useState(false);
+  const [pomoHighlightedTask, setPomoHighlightedTask] = useState("");
 
   // TASK CREATION
 
@@ -35,10 +37,10 @@ export const TaskContextProvider = ({ children, initialTasks }) => {
   return (
     <TaskContext.Provider
       value={{
-        hasHighlightedTask,
-        setHasHighlightedTask,
-        highlightedTask,
-        setHighlightedTask,
+        pomoHasHighlightedTask,
+        setPomoHasHighlightedTask,
+        pomoHighlightedTask,
+        setPomoHighlightedTask,
         createTask,
         reloadTasks,
         taskList,
